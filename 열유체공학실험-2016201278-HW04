@@ -1,0 +1,228 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled6.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/JK-step/jk/blob/master/%EC%97%B4%EC%9C%A0%EC%B2%B4%EA%B3%B5%ED%95%99%EC%8B%A4%ED%97%98-2016201278-HW04\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "eaUrIDsHrRri",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 134
+        },
+        "outputId": "53b7b298-c801-472a-ada8-e78d40d40d73"
+      },
+      "source": [
+        "while True:\n",
+        "  \n",
+        " \n",
+        "        headnum = int(input(\"몇 단을 보여드릴까요\"))\n",
+        "        for i in range(1,10):\n",
+        "        print (headnum, \"X\", i, \"=\", headnum * i)\n",
+        "        \n",
+        "                 \n",
+        "             "
+      ],
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-9-ebe74ea685d0>\"\u001b[0;36m, line \u001b[0;32m5\u001b[0m\n\u001b[0;31m    print (headnum, \"X\", i, \"=\", headnum * i)\u001b[0m\n\u001b[0m        ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m expected an indented block\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dwjZhGinosSb",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pDaE9FB8n8kv",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 52
+        },
+        "outputId": "3123bc91-0948-4e0f-d75f-f4dd39bc8b6a"
+      },
+      "source": [
+        "  import numpy as np\n",
+        "  \n",
+        "  x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])\n",
+        "  n = int(input(\"몇단\"))\n",
+        "  \n",
+        "  c = n * x\n",
+        "  print(c)"
+      ],
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "몇단3\n",
+            "[ 3  6  9 12 15 18 21 24 27]\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "LS5Gft5foxSk",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 633
+        },
+        "outputId": "3f7771f4-7678-482c-c590-4322e0eeb6c6"
+      },
+      "source": [
+        "# -*- coding: utf-8 -*- \n",
+        "import sys\n",
+        "import time\n",
+        "from numba import jit\n",
+        "import numpy as np\n",
+        "\n",
+        "\n",
+        "\n",
+        "def Gugudan(_input):\n",
+        "    print(\"===== 일반 연산 ==== \")\n",
+        "    startTime = time.time()\n",
+        "    \n",
+        "    for i in range(1,10):\n",
+        "        result = str(_input * i)\n",
+        "        print(str(_input) + \" x \" + str(i) + \" = \" + result)  \n",
+        "\n",
+        "    calTime = time.time() - startTime\n",
+        "    print(\"====================== 총 연산시간 : \" + str(calTime))\n",
+        "    GugudanNumpy(_input)\n",
+        "\n",
+        "\n",
+        "\n",
+        "def GugudanNumpy(_input):\n",
+        "    print(\"===== Numpy 연산 ====\")\n",
+        "    arr = np.array([1,2,3,4,5,6,7,8,9])\n",
+        "    \n",
+        "    startTime = time.time()\n",
+        "    \n",
+        "    for n in arr:\n",
+        "        result = str(_input * n)\n",
+        "        print(str(_input) + \" x \" + str(n) + \" = \" + result)\n",
+        "    \n",
+        "    calTime = (time.time() - startTime)\n",
+        "    print(\"====================== 총 연산시간 : \" + str(calTime))\n",
+        "    GugudanNumba(_input)\n",
+        "    \n",
+        "\n",
+        "\n",
+        "@jit(forceobj=True)\n",
+        "def GugudanNumba(_input):\n",
+        "    print(\"===== Numba 연산 ====\")\n",
+        "    startTime = time.time()\n",
+        "    \n",
+        "    for i in range(1,10):\n",
+        "        result = str(_input * i)\n",
+        "        print(str(_input) + \" x \" + str(i) + \" = \" + result)  \n",
+        "\n",
+        "    calTime = time.time() - startTime\n",
+        "    print(\"====================== 총 연산시간 :\" + str(calTime))\n",
+        "\n",
+        "\n",
+        "## 실행 ##\n",
+        "print(\"--------------\")\n",
+        "_input = input(\"2~9 숫자 입력하시죠: \" )\n",
+        "\n",
+        "if _input is None or _input.isdigit() is False :\n",
+        "    print(\"— error : Please insert a number\")\n",
+        "else:\n",
+        "    _input = int(_input)\n",
+        "    if (_input < 2 or 9 < _input) :\n",
+        "        print(\"— error : the number should be between 2(included) to 9(included)\")\n",
+        "    else:\n",
+        "        Gugudan(_input)\n",
+        "        \n"
+      ],
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "--------------\n",
+            "2~9 숫자 입력하시죠: 2\n",
+            "===== 일반 연산 ==== \n",
+            "2 x 1 = 2\n",
+            "2 x 2 = 4\n",
+            "2 x 3 = 6\n",
+            "2 x 4 = 8\n",
+            "2 x 5 = 10\n",
+            "2 x 6 = 12\n",
+            "2 x 7 = 14\n",
+            "2 x 8 = 16\n",
+            "2 x 9 = 18\n",
+            "====================== 총 연산시간 : 0.0001232624053955078\n",
+            "===== Numpy 연산 ====\n",
+            "2 x 1 = 2\n",
+            "2 x 2 = 4\n",
+            "2 x 3 = 6\n",
+            "2 x 4 = 8\n",
+            "2 x 5 = 10\n",
+            "2 x 6 = 12\n",
+            "2 x 7 = 14\n",
+            "2 x 8 = 16\n",
+            "2 x 9 = 18\n",
+            "====================== 총 연산시간 : 0.00019931793212890625\n",
+            "===== Numba 연산 ====\n",
+            "2 x 1 = 2\n",
+            "2 x 2 = 4\n",
+            "2 x 3 = 6\n",
+            "2 x 4 = 8\n",
+            "2 x 5 = 10\n",
+            "2 x 6 = 12\n",
+            "2 x 7 = 14\n",
+            "2 x 8 = 16\n",
+            "2 x 9 = 18\n",
+            "====================== 총 연산시간 :0.1559457778930664\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
