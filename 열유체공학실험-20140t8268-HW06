@@ -1,0 +1,53 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled10.ipynb",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/JK-step/jk/blob/master/%EC%97%B4%EC%9C%A0%EC%B2%B4%EA%B3%B5%ED%95%99%EC%8B%A4%ED%97%98-20140t8268-HW06\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tqe7HEOkktD7",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "def dXdt( t, X ) : # X[0]= x(t) , X[1]=v(t)                              \n",
+        "    return  X[1], -X[0]-(X[1]/4) # x'(t),v'(t)\n",
+        "\n",
+        "# 초기값\n",
+        "X0 = ( 10, 0 ) \n",
+        "\n",
+        "t0 = 0\n",
+        "tend = 20\n",
+        "\n",
+        "sol = solve_ivp( dXdt, (t0, tend), X0, t_eval=np.linspace(t0,tend,101) )\n",
+        "plt.plot( sol.t, sol.y[0] )\n",
+        "plt.xlabel('t')\n",
+        "plt.ylabel('y')\n",
+        "plt.show()"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
